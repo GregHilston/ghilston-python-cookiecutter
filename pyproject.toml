@@ -19,6 +19,7 @@ dodgy = "^0.2.1"
 isort = "^5.8.0"
 coverage = "^5.5"
 Sphinx = "^4.0.1"
+invoke = "^1.5.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
