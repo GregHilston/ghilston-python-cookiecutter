@@ -26,6 +26,7 @@ def lint(ctx):
     ctx.run(f"poetry run pylint {SOURCE_DIRECTORY} {TEST_DIRECTORY}", echo=True)
 
 
+
 @task
 def test(ctx):
     """Runs Pytest test suite"""
@@ -42,3 +43,11 @@ def coverage(ctx):
 def type_check(ctx):
     """Checks types of our Python source code"""
     ctx.run(f"poetry run mypy {SOURCE_DIRECTORY}", echo=True)
+
+
+@task
+def security(ctx):
+    """Performs security checks"""
+    ctx.run(f"poetry run bandit -r {SOURCE_DIRECTORY}", echo=True)
+    ctx.run(f"poetry run safety check --full-report", echo=True)
+    ctx.run(f"dodgy", echo=True)
