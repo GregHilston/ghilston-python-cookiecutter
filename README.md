@@ -42,22 +42,39 @@ Having used raw bash scripts and also `Makefile`s, I have found Invoke's Python 
 - [official documentation](http://www.pyinvoke.org/)
 - [getting started guide](http://docs.pyinvoke.org/en/0.23.0/getting_started.html)
 
-## Formatting
+## Formatting Tools: Black and Isort
 
-## Linting
+### Why We Use It
 
-## Security
+Black is a wonderful formatting tool that takes a "little to no configuration approach" which wil ensure that most Python code will look the same. In addition to Black, we leverage Isort to sort our imports automatically.
 
-## Type Checking
+## Linting Tools: Flake8 and Pylint
+
+### Why We Use It
+
+TODO
+
+## Security Tools: Bandit, Safety and Dodgy
+
+### Why We Use it 
+
+TODO
+
+## Type Checking Tool: Mypy
+
+### Why We Use it
+
+TODO
+
+## Testing Tool: Pytest
+
+### Why We Use It
+
+TODO
 
 ## Logging
 
-## Testing
 
-## Packaging
-
-- have a setup.py
-- see if poetry helps with this
 
 ## CICD
 
