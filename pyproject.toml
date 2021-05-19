@@ -22,6 +22,7 @@ Sphinx = "^4.0.1"
 invoke = "^1.5.0"
 pytest-cov = "^2.12.0"
 flake8 = "^3.9.2"
+poetry-githooks = "^1.1.4"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -63,3 +64,6 @@ testpaths = [
 norecursedirs = [
     ".git"
 ]
+
+[tool.githooks]
+pre-commit = "invoke magic"
