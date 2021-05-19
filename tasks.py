@@ -18,15 +18,25 @@ def format(ctx):
     ctx.run(f"poetry run black --line-length 100 {SOURCE_DIRECTORY} {TEST_DIRECTORY}", echo=True)
     ctx.run(f"poetry run isort {SOURCE_DIRECTORY} {TEST_DIRECTORY}", echo=True)
 
+
+@task
+def lint(ctx):
+    """Lints Python code"""
+    ctx.run(f"poetry run flake8 --show-source {SOURCE_DIRECTORY} {TEST_DIRECTORY}", echo=True)
+    ctx.run(f"poetry run pylint {SOURCE_DIRECTORY} {TEST_DIRECTORY}", echo=True)
+
+
 @task
 def test(ctx):
     """Runs Pytest test suite"""
     ctx.run("poetry run pytest", echo=True)
 
+
 @task
 def coverage(ctx):
     """Produces test coverage"""
     ctx.run("poetry run pytest --cov=app test/", echo=True)
+
 
 @task
 def type_check(ctx):
