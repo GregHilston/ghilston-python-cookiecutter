@@ -21,3 +21,8 @@ def test(ctx):
 def coverage(ctx):
     """Produces test coverage"""
     ctx.run("poetry run pytest --cov=app test/", echo=True)
+
+@task
+def type_check(ctx):
+    """Checks types of our Python source code"""
+    ctx.run(f"poetry run mypy {SOURCE_DIRECTORY}", echo=True)
