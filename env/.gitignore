@@ -1,0 +1,8 @@
+# ignores all files in this directory
+*
+
+# ignores all subdirectories in this directory
+*/
+
+# an exception to the above rules is we allow this file to be added
+!.gitignore
