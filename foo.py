@@ -9,6 +9,11 @@ setup_logging()
 logger = logging.getLogger(__name__)
 
 
+def foo():
+    """Demonstrates calling a local package's module's function"""
+    return example()
+
+
 if __name__ == "__main__":
-    message = example()
+    message = foo()
     logger.info(message)
