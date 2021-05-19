@@ -1,8 +1,8 @@
 """Example test code"""
 
-from app import app
+from ghilston_python_cookiecutter.bar.bar import example
 
 
-def test_app():
+def test_bar():
     """Examplifies how to test our source code"""
-    assert app.example() == "bar"
+    assert example() == "bar"

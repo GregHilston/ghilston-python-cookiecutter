@@ -1,10 +1,12 @@
+"""Invokes tasks"""
+
 import os
 
 from invoke import task
 
 
 ROOT_PATH = os.path.dirname(__file__)
-SOURCE_DIRECTORY = "app"
+SOURCE_DIRECTORY = "ghilston_python_cookiecutter"
 SOURCE_PATH = os.path.join(ROOT_PATH, SOURCE_DIRECTORY)
 ENTRYPOINT = "app.py"
 ENTRYPOINT_PATH = os.path.join(SOURCE_PATH, ENTRYPOINT)
