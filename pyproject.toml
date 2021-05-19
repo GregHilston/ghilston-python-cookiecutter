@@ -26,3 +26,10 @@ flake8 = "^3.9.2"
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+# per this thread, https://github.com/PyCQA/pylint/issues/3181 ,we must name this section this way
+[tool.pylint.messages_control]
+# enables inspecting types defined for functions, methods and constructors
+load-plugins = pylint.extensions.docparams
+
+max-line-length = 120
