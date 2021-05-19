@@ -1,0 +1,6 @@
+[MASTER]
+# enables inspecting types defined for functions, methods and constructors
+load-plugins=pylint.extensions.docparams
+
+[format]
+max-line-length = 120
