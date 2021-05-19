@@ -13,6 +13,11 @@ LOGS_PATH = os.path.join(ROOT_PATH, LOGS_DIRECTORY)
 
 
 @task
+def format(ctx):
+    """Formats Python code"""
+    ctx.run(f"poetry run black --line-length 100 {SOURCE_DIRECTORY} {TEST_DIRECTORY}", echo=True)
+
+@task
 def test(ctx):
     """Runs Pytest test suite"""
     ctx.run("poetry run pytest", echo=True)
