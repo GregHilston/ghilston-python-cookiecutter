@@ -12,6 +12,10 @@ The [official website](https://python-poetry.org/docs/) suggests one install Poe
 
 `$ curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -`
 
+### Removing A Package
+
+- When one removes a package from Poetry using `$ poetry remove [package-name]` the package is removed from the `pyproject.toml` but it is not uninstalled from the virtuale environment. As described in [this github comment](https://github.com/python-poetry/poetry/issues/648#issuecomment-461149012) one can run `$ poetry shell` followed by `exit` to see where the virtual environment lives, then blow away said virtual environment's directory and then ask Poetry to reinstall all the dependencies using `$ poetry install`. This will resolve in your virtual environment no longer having said removed packaged.
+
 ### References
 
 - [official documentation](https://python-poetry.org/docs/)
