@@ -6,10 +6,18 @@ from invoke import task
 ROOT_PATH = os.path.dirname(__file__)
 SOURCE_DIRECTORY = "app"
 SOURCE_PATH = os.path.join(ROOT_PATH, SOURCE_DIRECTORY)
+ENTRYPOINT = "app.py"
+ENTRYPOINT_PATH = os.path.join(SOURCE_PATH, ENTRYPOINT)
 TEST_DIRECTORY = "tests"
 TEST_PATH = os.path.join(ROOT_PATH, TEST_DIRECTORY)
 LOGS_DIRECTORY = "log"
 LOGS_PATH = os.path.join(ROOT_PATH, LOGS_DIRECTORY)
+
+
+@task
+def run(ctx):
+    """Runs the application"""
+    ctx.run(f"poetry run python3 {ENTRYPOINT_PATH}", echo=True)
 
 
 @task
