@@ -25,7 +25,7 @@ def run(ctx):
 @task
 def format(ctx):
     """Formats Python code"""
-    ctx.run(f"poetry run black --line-length 100 {SOURCE_DIRECTORY} {TEST_DIRECTORY}", echo=True)
+    ctx.run(f"poetry run black {SOURCE_DIRECTORY} {TEST_DIRECTORY}", echo=True)
     ctx.run(f"poetry run isort {SOURCE_DIRECTORY} {TEST_DIRECTORY}", echo=True)
 
 

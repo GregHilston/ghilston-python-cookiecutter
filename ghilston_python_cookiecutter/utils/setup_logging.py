@@ -16,6 +16,4 @@ def setup_logging(default_path="logging.json", default_level=logging.INFO, env_k
         logging.config.dictConfig(config)
     else:
         logging.basicConfig(level=default_level)
-        logging.getLogger(__name__).warning(
-            "Unable to load logging configuration file %s", default_path
-        )
+        logging.getLogger(__name__).warning("Unable to load logging configuration file %s", default_path)
