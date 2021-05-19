@@ -16,6 +16,15 @@ The [official website](https://python-poetry.org/docs/) suggests one install Poe
 
 - When one removes a package from Poetry using `$ poetry remove [package-name]` the package is removed from the `pyproject.toml` but it is not uninstalled from the virtuale environment. As described in [this github comment](https://github.com/python-poetry/poetry/issues/648#issuecomment-461149012) one can run `$ poetry shell` followed by `exit` to see where the virtual environment lives, then blow away said virtual environment's directory and then ask Poetry to reinstall all the dependencies using `$ poetry install`. This will resolve in your virtual environment no longer having said removed packaged.
 
+### Upgrading Pip
+
+Using this [Github issue]() as a guide, we can upgrade pip by running
+
+```
+$ poetry shell
+$ pip install -U pip
+```
+
 ### References
 
 - [official documentation](https://python-poetry.org/docs/)

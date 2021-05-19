@@ -26,7 +26,6 @@ def lint(ctx):
     ctx.run(f"poetry run pylint {SOURCE_DIRECTORY} {TEST_DIRECTORY}", echo=True)
 
 
-
 @task
 def test(ctx):
     """Runs Pytest test suite"""
@@ -51,3 +50,9 @@ def security(ctx):
     ctx.run(f"poetry run bandit -r {SOURCE_DIRECTORY}", echo=True)
     ctx.run(f"poetry run safety check --full-report", echo=True)
     ctx.run(f"dodgy", echo=True)
+
+
+@task(pre=[format, lint, type_check, security])
+def magic(ctx):
+    """Foo"""
+    pass
