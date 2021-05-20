@@ -1,19 +1,21 @@
 # ghilston-python-cookiecutter
 
-## Virtual Environments, Dependency Resolution, Publishing Packages: `poetry`
+## Virtual Environments, Dependency Resolution, Publishing Packages: [`poetry`](https://github.com/python-poetry/poetry)
 
 ### Why We Use It
 
 Having used numerous tools in the past to handle dependencies, separate tools to build out a virtual environment and yet more tools to publish a package to say PyPi, I have found Poetry's feature rich approach to be a one stop shop for a new Python project.
 
-### Install Application
+### How To Install
+
+This is the only dependency listed that we'll install by hand, as `poetry` will install all other dependencies for us.
 
 The [official website](https://python-poetry.org/docs/) suggests one install Poetry by running:
 
 `$ curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -`
 
 
-### Plugin For Githooks: `poetry-githooks`
+### Plugin For Githooks: [`poetry-githooks`](https://pypi.org/project/poetry-githooks/)
 
 We leverage this plugin to handle githooks for us, to make them portable and easy to install. By default our githook is a pre-commit, which will ensure all our commits have been checked for formatting, linting, security, and our tests.
 
@@ -39,7 +41,7 @@ $ pip install -U pip
 - [official documentation](https://python-poetry.org/docs/)
 - [this talk on why Poetry is an excellent tool](https://www.youtube.com/watch?v=QX_Nhu1zhlg&t=202s)
 
-## Task Execution Tool: `invoke`
+## Task Execution Tool: [`invoke`](https://github.com/pyinvoke/invoke)
 
 ### Why We Use It
 
@@ -51,40 +53,46 @@ Having used raw bash scripts and also `Makefile`s, I have found Invoke's Python 
 - [official documentation](http://www.pyinvoke.org/)
 - [getting started guide](http://docs.pyinvoke.org/en/0.23.0/getting_started.html)
 
-## Formatting Tools: `black` and `isort`
+## Formatting Tools: [`black`](https://github.com/psf/black) and [`isort`](https://github.com/PyCQA/isort)
 
 ### Why We Use It
 
 Black is a wonderful formatting tool that takes a "little to no configuration approach" which wil ensure that most Python code will look the same. In addition to Black, we leverage Isort to sort our imports automatically.
 
-## Linting Tools: `flake8` and `pylint
+## Linting Tools: [`flake8`](https://github.com/PyCQA/flake8) and [`pylint`](https://github.com/PyCQA/pylint)
 
 ### Why We Use It
 
-TODO
+We leverage both of these tools as both cover some aspects that the other does not.
 
-## Security Tools: `bandit`, `safety` and `dodgy`
-
-### Why We Use it
-
-TODO
-
-## Type Checking Tool: `mypy`
+## Security Tools: [`bandit`](https://github.com/PyCQA/bandit), [`safety`](https://github.com/pyupio/safety), and [`dodgy`](https://github.com/landscapeio/dodgy)
 
 ### Why We Use it
 
-TODO
+This suite of tools will check of common security mistakes and even check against a database of known versions of compromised packages.
 
-## Testing Tool: `pytest`
+## Type Checking Tool: [`mypy`](https://github.com/python/mypy)
+
+### Why We Use it
+
+This is one of my favorite packages for Python, it allows us to check the types of our classes, method and functions and get warnings if we're calling code with incorrect types.
+
+## Testing Tool: [`pytest`](https://github.com/pytest-dev/pytest)
 
 ### Why We Use It
 
-TODO
+While there are many alternatives, such as `unittest` and `nose`, I've found `pytest`'s syntax to be easy to use and unobstrusive.
 
 ## Logging
+
+I've grabbed a common logging configuration from online to act as our default setup.
+
+If we were to use this cookiecutter for a package, we'd want to disable the `FileHandler`, as this can cause difficulty with users leveraging our package.
+
+## Docker
 
 TODO
 
 ## CICD
 
-- integration with Circle CI with badge
+TODO
