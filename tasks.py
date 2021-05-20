@@ -87,4 +87,5 @@ def docker_run(ctx):
     """Builds Docker container"""
     # can read here for why pty=True is required
     # http://www.pyinvoke.org/faq.html#why-is-my-command-behaving-differently-under-invoke-versus-being-run-by-hand
-    ctx.run(f"docker run -it ghilston-python-cookiecutter python3 foo.py", pty=True)
+
+    ctx.run(f"docker run -it ghilston-python-cookiecutter poetry run invoke run", pty=True)
