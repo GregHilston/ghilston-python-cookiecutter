@@ -1,16 +1,25 @@
 # ghilston-python-cookiecutter
 
-## Virtual Environments, Dependency Resolution, Publishing Packages: Poetry
+## Virtual Environments, Dependency Resolution, Publishing Packages: `poetry`
 
 ### Why We Use It
 
 Having used numerous tools in the past to handle dependencies, separate tools to build out a virtual environment and yet more tools to publish a package to say PyPi, I have found Poetry's feature rich approach to be a one stop shop for a new Python project.
 
-### Install
+### Install Application
 
 The [official website](https://python-poetry.org/docs/) suggests one install Poetry by running:
 
 `$ curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -`
+
+
+### Plugin For Githooks: `poetry-githooks`
+
+We leverage this plugin to handle githooks for us, to make them portable and easy to install. By default our githook is a pre-commit, which will ensure all our commits have been checked for formatting, linting, security, and our tests.
+
+To install or apply changes to one's `[tool.githooks]` simply run:
+
+`$ poetry run githooks setup`
 
 ### Removing A Package
 
@@ -30,7 +39,7 @@ $ pip install -U pip
 - [official documentation](https://python-poetry.org/docs/)
 - [this talk on why Poetry is an excellent tool](https://www.youtube.com/watch?v=QX_Nhu1zhlg&t=202s)
 
-## Task Execution Tool: Invoke
+## Task Execution Tool: `invoke`
 
 ### Why We Use It
 
@@ -42,31 +51,31 @@ Having used raw bash scripts and also `Makefile`s, I have found Invoke's Python 
 - [official documentation](http://www.pyinvoke.org/)
 - [getting started guide](http://docs.pyinvoke.org/en/0.23.0/getting_started.html)
 
-## Formatting Tools: Black and Isort
+## Formatting Tools: `black` and `isort`
 
 ### Why We Use It
 
 Black is a wonderful formatting tool that takes a "little to no configuration approach" which wil ensure that most Python code will look the same. In addition to Black, we leverage Isort to sort our imports automatically.
 
-## Linting Tools: Flake8 and Pylint
+## Linting Tools: `flake8` and `pylint
 
 ### Why We Use It
 
 TODO
 
-## Security Tools: Bandit, Safety and Dodgy
-
-### Why We Use it 
-
-TODO
-
-## Type Checking Tool: Mypy
+## Security Tools: `bandit`, `safety` and `dodgy`
 
 ### Why We Use it
 
 TODO
 
-## Testing Tool: Pytest
+## Type Checking Tool: `mypy`
+
+### Why We Use it
+
+TODO
+
+## Testing Tool: `pytest`
 
 ### Why We Use It
 
@@ -74,7 +83,7 @@ TODO
 
 ## Logging
 
-
+TODO
 
 ## CICD
 
