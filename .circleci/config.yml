@@ -24,7 +24,7 @@ jobs: # A basic unit of work in a run
             poetry run invoke lint
       - run:
           command: |
-            poetry run invoke type_check
+            poetry run invoke type-check
       - run:
           command: |
             poetry run invoke test
