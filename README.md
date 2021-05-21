@@ -83,6 +83,12 @@ This is one of my favorite packages for Python, it allows us to check the types 
 
 While there are many alternatives, such as `unittest` and `nose`, I've found `pytest`'s syntax to be easy to use and unobstrusive.
 
+## Documentation Tool: [`sphinx`](https://github.com/sphinx-doc/sphinx)
+
+### Why We use It
+
+We use this to ensure that all the wonder docstrings we are writing are parsed and create a much more human readable HTML experience.
+
 ## Logging
 
 I've grabbed a common logging configuration from online to act as our default setup.
