@@ -105,7 +105,7 @@ def build_docs(ctx):
         print(f"To view built docs see {SPHINX_DOCS_DIRECTORY}/{SPHINX_OUTPUT_DIRECTORY}/html/index.html")
 
 
-@task(pre=[format, lint, type_check, security])
+@task(pre=[format, lint, type_check, test, security])
 def magic(ctx):
     """Foo"""
     pass

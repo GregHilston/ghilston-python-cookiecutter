@@ -21,10 +21,18 @@ jobs: # A basic unit of work in a run
             - /home/circleci/.cache/pypoetry/virtualenvs
       - run:
           command: |
+            poetry run invoke lint
+      - run:
+          command: |
+            poetry run invoke type_check
+      - run:
+          command: |
             poetry run invoke test
+      - run:
+          command: |
+            poetry run invoke security
       - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
          path: test-results
       - store_artifacts: # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
           path: test-results
           destination: tr1
- 
