@@ -99,6 +99,8 @@ If we were to use this cookiecutter for a package, we'd want to disable the `Fil
 
 Our `docker/Dockerfile` is based off of [this wonderful resource](https://github.com/michael0liver/python-poetry-docker-example) which seems to have come from [this discussion](https://github.com/python-poetry/poetry/discussions/1879)
 
-## CICD
+## CICD Tool: [Circle CI](https://circleci.com)
 
-TODO
+### Configuration
+
+Navigate to the website, log in and click "Set Up Project" next to your existing Github repository.
