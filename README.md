@@ -55,25 +55,25 @@ Having used raw bash scripts and also `Makefile`s, I have found Invoke's Python 
 
 ## Formatting Tools: [`black`](https://github.com/psf/black) and [`isort`](https://github.com/PyCQA/isort)
 
-### Why We Use It
+### Why We Use Them
 
 Black is a wonderful formatting tool that takes a "little to no configuration approach" which wil ensure that most Python code will look the same. In addition to Black, we leverage Isort to sort our imports automatically.
 
 ## Linting Tools: [`flake8`](https://github.com/PyCQA/flake8) and [`pylint`](https://github.com/PyCQA/pylint)
 
-### Why We Use It
+### Why We Use Them
 
 We leverage both of these tools as both cover some aspects that the other does not.
 
 ## Security Tools: [`bandit`](https://github.com/PyCQA/bandit), [`safety`](https://github.com/pyupio/safety), and [`dodgy`](https://github.com/landscapeio/dodgy)
 
-### Why We Use it
+### Why We Use Them
 
 This suite of tools will check of common security mistakes and even check against a database of known versions of compromised packages.
 
 ## Type Checking Tool: [`mypy`](https://github.com/python/mypy)
 
-### Why We Use it
+### Why We Use It
 
 This is one of my favorite packages for Python, it allows us to check the types of our classes, method and functions and get warnings if we're calling code with incorrect types.
 
@@ -83,11 +83,15 @@ This is one of my favorite packages for Python, it allows us to check the types 
 
 While there are many alternatives, such as `unittest` and `nose`, I've found `pytest`'s syntax to be easy to use and unobstrusive.
 
-## Documentation Tool: [`sphinx`](https://github.com/sphinx-doc/sphinx)
+## Documentation Tools: [`sphinx`](https://github.com/sphinx-doc/sphinx) and [read the docs](https://readthedocs.org/)
 
-### Why We use It
+### Why We use Them
 
 We use this to ensure that all the wonder docstrings we are writing are parsed and create a much more human readable HTML experience.
+
+### Configuration
+
+Navigate to the [website](https://readthedocs.org/), login and go to the dashboard and "Import a Project"
 
 ## Logging
 
@@ -103,4 +107,4 @@ Our `docker/Dockerfile` is based off of [this wonderful resource](https://github
 
 ### Configuration
 
-Navigate to the website, log in and click "Set Up Project" next to your existing Github repository.
+Navigate to the [website](https://circleci.com), log in and click "Set Up Project" next to your existing Github repository.
