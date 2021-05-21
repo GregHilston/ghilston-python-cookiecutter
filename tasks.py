@@ -106,11 +106,13 @@ def build_docs(ctx):
         print(f"To view built docs see {SPHINX_DOCS_DIRECTORY}/{SPHINX_OUTPUT_DIRECTORY}/html/index.html")
 
 
-@task(pre=[format, lint, type_check, test, security])
+@task(pre=[format, lint, type_check, test, security, build_docs])
 def magic(ctx):
-    """Performs all our checking steps: format, lint, type_check, test, security."""
-    # only uses pre
-    pass
+    """Performs all our checking steps: format, lint, type_check, test, security, build_docs. Then adds the docs to git"""
+    # adds our docs to this commit
+    print(f"Adding {SPHINX_DOCS_DIRECTORY} to this Git staging")
+    ctx.run(f"git add {SPHINX_DOCS_DIRECTORY}")
+    ctx.run(f"git add -u {SPHINX_DOCS_DIRECTORY}")
 
 
 @task
