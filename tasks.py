@@ -130,7 +130,7 @@ def docker_run(ctx):
 @task
 def circle_ci_test(ctx):
     """Runs Pytest test suite for Circle CI, saving our output as Junit XML style for ease of parsing"""
-    ctx.run(f"os.mkdir('{CIRCLE_CI_TEST_OUTPUT_DIRECTORY}')")
+    ctx.run(f"mkdir {CIRCLE_CI_TEST_OUTPUT_DIRECTORY}")
     ctx.run(f"poetry run pytest --junitxml={CIRCLE_CI_TEST_OUTPUT_DIRECTORY}/junit.xml", echo=True)
 
 
