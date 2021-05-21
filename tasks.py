@@ -21,6 +21,7 @@ SPHINX_DOCS_DIRECTORY = "./docs"
 SPHINX_SOURCE_DIRECTORY = "."
 SPHINX_OUTPUT_DIRECTORY = "_build"
 DOCKER_DIRECTORY = "docker"
+CIRCLE_CI_TEST_OUTPUT_DIRECTORY = "test-results"
 
 
 @contextlib.contextmanager
@@ -107,7 +108,8 @@ def build_docs(ctx):
 
 @task(pre=[format, lint, type_check, test, security])
 def magic(ctx):
-    """Foo"""
+    """Performs all our checking steps: format, lint, type_check, test, security."""
+    # only uses pre
     pass
 
 
@@ -122,5 +124,19 @@ def docker_run(ctx):
     """Builds Docker container"""
     # can read here for why pty=True is required
     # http://www.pyinvoke.org/faq.html#why-is-my-command-behaving-differently-under-invoke-versus-being-run-by-hand
-
     ctx.run(f"docker run -it ghilston-python-cookiecutter poetry run invoke run", pty=True)
+
+
+@task
+def circle_ci_test(ctx):
+    """Runs Pytest test suite for Circle CI, saving our output as Junit XML style for ease of parsing"""
+    ctx.run(f"os.mkdir({CIRCLE_CI_TEST_OUTPUT_DIRECTORY})")
+    ctx.run(f"poetry run pytest --junitxml={CIRCLE_CI_TEST_OUTPUT_DIRECTORY}/junit.xml", echo=True)
+
+
+@task
+def circle_ci_security(ctx):
+    """Performs security checks for Circle CI, ignoring an out of date Pip binary"""
+    ctx.run(f"poetry run bandit -r {SOURCE_DIRECTORY}", echo=True)
+    ctx.run(f"poetry run safety check --full-report --ignore 40291", echo=True)
+    ctx.run(f"dodgy", echo=True)
