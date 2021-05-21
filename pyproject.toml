@@ -32,6 +32,9 @@ build-backend = "poetry.core.masonry.api"
 
 # A good example of a pyproject can be found from home-assistant here: https://github.com/home-assistant/core/blob/dev/pyproject.toml
 
+[tool.poetry.extras]
+docs = ["sphinx"]
+
 [tool.black]
 line-length = 120
 
