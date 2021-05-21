@@ -1,5 +1,6 @@
 """Invokes tasks"""
 
+import contextlib
 import os
 
 from invoke import task
@@ -15,7 +16,26 @@ TEST_DIRECTORY = "tests"
 TEST_PATH = os.path.join(ROOT_PATH, TEST_DIRECTORY)
 LOGS_DIRECTORY = "log"
 LOGS_PATH = os.path.join(ROOT_PATH, LOGS_DIRECTORY)
+SPHINX_DOCS_DIRECTORY = "./docs"
+# Relative to `./docs` directory
+SPHINX_SOURCE_DIRECTORY = "."
+SPHINX_OUTPUT_DIRECTORY = "_build"
 DOCKER_DIRECTORY = "docker"
+
+
+@contextlib.contextmanager
+def chdir(dirname=None):
+    """Changes directory
+
+    From: https://github.com/pyinvoke/invoke/issues/225#issuecomment-87240655
+    """
+    curdir = os.getcwd()
+    try:
+        if dirname is not None:
+            os.chdir(dirname)
+        yield
+    finally:
+        os.chdir(curdir)
 
 
 @task
@@ -65,9 +85,24 @@ def security(ctx):
 
 
 @task
-def docs(ctx):
+def clean_docs(ctx):
+    """Cleans documentation"""
+    # Makefile equivalent is inside the ./docs folder we'd run
+    # `$ make clean` which runs `$ sphinx-build -M clean "." "_build"`
+    with chdir("./docs"):
+        ctx.run(f"poetry run sphinx-build -M clean '{SPHINX_SOURCE_DIRECTORY}' '{SPHINX_OUTPUT_DIR}'", echo=True)
+
+
+@task
+def build_docs(ctx):
     """Generates documentation"""
-    ctx.run(f"poetry run mypy {SOURCE_DIRECTORY}", echo=True)
+    # Makefile equivalent is inside the ./docs folder we'd run
+    # `$ sphinx-apidoc -o . ..`
+    # `$ make html` which runs `$ sphinx-build -M html "." "_build"`
+    with chdir("./docs"):
+        ctx.run(f"poetry run sphinx-apidoc -o {SPHINX_SOURCE_DIRECTORY} ..", echo=True)
+        ctx.run(f"poetry run sphinx-build -M html {SPHINX_SOURCE_DIRECTORY} {SPHINX_OUTPUT_DIRECTORY}", echo=True)
+        print(f"To view built docs see {SPHINX_DOCS_DIRECTORY}/{SPHINX_OUTPUT_DIRECTORY}/html/index.html")
 
 
 @task(pre=[format, lint, type_check, security])
