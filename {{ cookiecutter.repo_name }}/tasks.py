@@ -7,7 +7,7 @@ from invoke import task
 
 
 ROOT_PATH = os.path.dirname(__file__)
-PROJECT_NAME = "ghilston-python-cookiecutter"
+PROJECT_NAME = "{{ cookiecutter.repo_name }}"
 SOURCE_DIRECTORY = PROJECT_NAME.replace('-', '_')
 SOURCE_PATH = os.path.join(ROOT_PATH, SOURCE_DIRECTORY)
 ENTRYPOINT = "foo.py"
