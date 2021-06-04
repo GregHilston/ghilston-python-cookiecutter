@@ -14,6 +14,8 @@ And fill out the form
 
 ## Virtual Environments, Dependency Resolution, Publishing Packages: [`poetry`](https://github.com/python-poetry/poetry)
 
+Then one can manually copy the `.circleci` folder
+
 ### Why We Use It
 
 Having used numerous tools in the past to handle dependencies, separate tools to build out a virtual environment and yet more tools to publish a package to say PyPi, I have found Poetry's feature rich approach to be a one stop shop for a new Python project.
