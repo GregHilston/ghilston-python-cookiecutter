@@ -2,8 +2,8 @@
 
 import logging
 
-from ghilston_python_cookiecutter.utils.setup_logging import setup_logging
-from ghilston_python_cookiecutter.bar.bar import example
+from {{ cookiecutter.repo_name }}.utils.setup_logging import setup_logging
+from {{ cookiecutter.repo_name }}.bar.bar import example
 
 setup_logging()
 logger = logging.getLogger(__name__)
