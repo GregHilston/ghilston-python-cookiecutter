@@ -1,4 +1,2 @@
 [flake8]
-# E501 disallows lines longer than 80 characters. since we use 120 characters as a max length, we disable this check
-ignore = E501
 max-line-length = 120
