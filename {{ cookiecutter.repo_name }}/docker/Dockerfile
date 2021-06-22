@@ -81,7 +81,7 @@ COPY --from=builder-base $VENV_PATH $VENV_PATH
 COPY ./docker/docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
 
-COPY ./ghilston_python_cookiecutter /app/ghilston_python_cookiecutter
+COPY ./{{ cookiecutter.repo_name }} /app/{{ cookiecutter.repo_name }}
 COPY ./foo.py /app/foo.py
 WORKDIR /app
 
