@@ -74,7 +74,10 @@ CMD ["tail", "-f", "/dev/null"]
 
 # 'production' stage uses the clean 'python-base' stage and copyies
 # in only our runtime deps that were installed in the 'builder-base'
-FROM python-base as production
+# TODO decide if we should replace usage of builder-base here with the 
+# original usage of python-base and replace the usage of poetry with
+# raw bash or not
+FROM builder-base as production
 
 COPY --from=builder-base $VENV_PATH $VENV_PATH
 
