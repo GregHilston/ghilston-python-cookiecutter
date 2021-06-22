@@ -126,7 +126,7 @@ def docker_run(ctx):
     """Builds Docker container"""
     # can read here for why pty=True is required
     # http://www.pyinvoke.org/faq.html#why-is-my-command-behaving-differently-under-invoke-versus-being-run-by-hand
-    ctx.run(f"docker run -it {PROJECT_NAME} poetry run invoke run", pty=True)
+    ctx.run(f"docker run -it {PROJECT_NAME} /docker-entrypoint.sh python {ENTRYPOINT}", pty=True)
 
 
 @task
