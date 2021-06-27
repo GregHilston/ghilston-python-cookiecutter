@@ -10,7 +10,7 @@ or copy this repo straight from github by running:
 
 `$ python3 -m cookiecutter https://github.com/GregHilston/ghilston-python-cookiecutter`
 
-And fill out the form
+And fill out the interactive form.
 
 ## Virtual Environments, Dependency Resolution, Publishing Packages: [`poetry`](https://github.com/python-poetry/poetry)
 
@@ -20,13 +20,15 @@ Then one can manually copy the `.circleci` folder
 
 Having used numerous tools in the past to handle dependencies, separate tools to build out a virtual environment and yet more tools to publish a package to say PyPi, I have found Poetry's feature rich approach to be a one stop shop for a new Python project.
 
-### How To Install
+### How To Install Our Dependencies
 
-This is the only dependency listed that we'll install by hand, as `poetry` will install all other dependencies for us.
+Poetry is the only dependency listed that we'll install by hand, as `poetry` will install all other dependencies for us.
 
 The [official website](https://python-poetry.org/docs/) suggests one install Poetry by running:
 
 `$ curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -`
+
+Once we have poetry installed, we can use it to install our other dependecies by running `$ poetry shell`, and then `$ poetry install`.
 
 
 ### Plugin For Githooks: [`poetry-githooks`](https://pypi.org/project/poetry-githooks/)
@@ -60,6 +62,10 @@ $ pip install -U pip
 ### Why We Use It
 
 Having used raw bash scripts and also `Makefile`s, I have found Invoke's Python approach to handling task execution to be a much more natural approach. One can easily highlight improvements over the previously mentioned approaches by looking at how Invoke handles accepting command line arguments, providing help text and even just the fact that since its Python code, one has access to all Python packages.
+
+### How To Use It
+
+We generally use this with Poetry, to run commands within our virtual environment. For example, `$ poetry run invoke magic`.
 
 ### References
 
@@ -117,7 +123,13 @@ If we were to use this cookiecutter for a package, we'd want to disable the `Fil
 
 Our `docker/Dockerfile` is based off of [this wonderful resource](https://github.com/michael0liver/python-poetry-docker-example) which seems to have come from [this discussion](https://github.com/python-poetry/poetry/discussions/1879)
 
+Our Dockerfile has many layers, each used for specific scenarios. 
+
 ## CICD Tool: [Circle CI](https://circleci.com)
+
+### Why We Use It
+
+I previously used [Travis CI](https://travis-ci.org/) until they made some decisions I wasn't a fan of. I've had nothing but a pleasant experience having switched to [Circle CI](https://circleci.com/). I am interested in trying [Github Actions](https://github.com/features/actions), but haven't gotten around to it. Plus this would tie us to Github.
 
 ### Configuration
 
