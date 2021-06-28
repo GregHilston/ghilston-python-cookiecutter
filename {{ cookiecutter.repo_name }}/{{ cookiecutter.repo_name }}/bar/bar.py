@@ -4,8 +4,10 @@
 def example() -> str:
     """Example function
 
-    Provided purely as an example and should be deleted
+    Provided purely as an example
 
-    :return: hard coded string
+    Returns:
+        Hard coded message
     """
     return "bar"
+

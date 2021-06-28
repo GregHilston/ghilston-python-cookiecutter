@@ -4,8 +4,17 @@ import logging.config
 import os
 
 
-def setup_logging(default_path="logging.json", default_level=logging.INFO, env_key="LOG_CFG"):
-    """Sets up logging configuration"""
+def setup_logging(default_path: str="logging.json", default_level: int=logging.INFO, env_key: str="LOG_CFG"):
+    """Sets up logging configuration
+
+    Configures our logging in a pleasant to view output.
+
+    Args:
+        default_path: Path to logging json file. used if a valid env_key is not provided.
+        default_level: Level of logging to set.
+        env_key: Environment variable key that holds the path to a logging json file. This takes precedence to the
+            default_path.
+    """
     path = default_path
     value = os.getenv(env_key, None)
     if value:
