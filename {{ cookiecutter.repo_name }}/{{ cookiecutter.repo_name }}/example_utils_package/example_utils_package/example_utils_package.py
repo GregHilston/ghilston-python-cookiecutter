@@ -4,7 +4,7 @@ import logging.config
 import os
 
 
-def setup_logging(default_path: str="logging.json", default_level: int=logging.INFO, env_key: str="LOG_CFG"):
+def setup_logging(default_path: str = "logging.json", default_level: int = logging.INFO, env_key: str = "LOG_CFG"):
     """Sets up logging configuration
 
     Configures our logging in a pleasant to view output.
