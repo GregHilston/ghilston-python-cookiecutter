@@ -2,24 +2,13 @@
 
 import logging
 
-from {{ cookiecutter.repo_name }}.utils.setup_logging import setup_logging
-from {{ cookiecutter.repo_name }}.bar.bar import example
+from {{ cookiecutter.repo_name }}.example_utils_package.setup_logging_module import setup_logging
+from {{ cookiecutter.repo_name }}.example_package.example_package.example_module import example_function
 
 
 setup_logging()
 logger = logging.getLogger(__name__)
 
 
-def foo() -> str:
-    """Demonstrates calling a local package's module's function
-
-    Returns:
-        Example message
-    """
-    return example()
-
-
 if __name__ == "__main__":
-    message = foo()
-    logger.info(message)
-
+    logger.info(example_function)
