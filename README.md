@@ -105,6 +105,8 @@ While there are many alternatives, such as `unittest` and `nose`, I've found `py
 
 ## Documentation Tools: [`sphinx`](https://github.com/sphinx-doc/sphinx) and [read the docs](https://readthedocs.org/)
 
+_The configuration is in `docs/conf.py`_
+
 ### Why We use Them
 
 We use this to ensure that all the wonder docstrings we are writing are parsed and create a much more human readable HTML experience.
