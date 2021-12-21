@@ -91,7 +91,7 @@ def clean_docs(ctx):
     # Makefile equivalent is inside the ./docs folder we'd run
     # `$ make clean` which runs `$ sphinx-build -M clean "." "_build"`
     with chdir("./docs"):
-        ctx.run(f"poetry run sphinx-build -M clean '{SPHINX_SOURCE_DIRECTORY}' '{SPHINX_OUTPUT_DIR}'", echo=True)
+        ctx.run(f"poetry run sphinx-build -M clean '{SPHINX_SOURCE_DIRECTORY}' '{SPHINX_OUTPUT_DIRECTORY}'", echo=True)
 
 
 @task
