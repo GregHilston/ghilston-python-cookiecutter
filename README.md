@@ -127,6 +127,8 @@ Our Dockerfile has many layers, each used for specific scenarios.
 
 ## CICD Tool: [Circle CI](https://circleci.com)
 
+_Note: We don't use Circle CI for this `ghilston-python-cookiecutter`, rather we have it configured for the nested project that cookie cutter will clone for us.
+
 ### Why We Use It
 
 I previously used [Travis CI](https://travis-ci.org/) until they made some decisions I wasn't a fan of. I've had nothing but a pleasant experience having switched to [Circle CI](https://circleci.com/). I am interested in trying [Github Actions](https://github.com/features/actions), but haven't gotten around to it. Plus this would tie us to Github.

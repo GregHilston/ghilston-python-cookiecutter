@@ -1,9 +1,8 @@
 # TODO
 
-- Revisit our 
-  - circle ci integration
+- Revisit our
   - docs directory
-  - docker/ directory 
+  - docker/ directory
   - logs directory
 - revamp our tasks.py
 - Setup precommit and use tasks.py
