@@ -61,11 +61,7 @@ def lint(ctx):
 @task
 def test(ctx):
     """Runs Pytest test suite"""
-    # Runs the main script's tests
-    ctx.run("poetry run pytest", echo=True)
-
-    # Runs the package's tests
-    ctx.run(f"poetry run pytest {PROJECT_NAME}", echo=True)
+    ctx.run(f"poetry run pytest . {PROJECT_NAME}", echo=True)
 
 
 @task
@@ -77,7 +73,7 @@ def coverage(ctx):
 @task
 def type_check(ctx):
     """Checks types of our Python source code"""
-    ctx.run(f"poetry run mypy {PROJECT_NAME}", echo=True)
+    ctx.run(f"poetry run mypy {PROJECT_NAME} {TEST_DIRECTORY}", echo=True)
 
 
 @task
