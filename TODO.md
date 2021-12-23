@@ -6,6 +6,8 @@
   - logs directory
 - revamp our tasks.py
   - fix coverage task
-  - fix test atsk
+    - writing config file https://coverage.readthedocs.io/en/latest/config.html:w
+    - 
+  - fix test task
 - Setup precommit and use tasks.py
 - test out our cookie cutter

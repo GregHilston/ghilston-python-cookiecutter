@@ -67,7 +67,7 @@ def test(ctx):
 @task
 def coverage(ctx):
     """Produces test coverage"""
-    ctx.run(f"poetry run pytest --cov={PROJECT_NAME} {TEST_DIRECTORY}", echo=True)
+    ctx.run(f"poetry run pytest --cov=. --cov={PROJECT_NAME} --cov={TEST_DIRECTORY}", echo=True)
 
 
 @task
