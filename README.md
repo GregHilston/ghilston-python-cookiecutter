@@ -33,7 +33,7 @@ Once we have poetry installed, we can use it to install our other dependecies by
 
 ### Plugin For Githooks: [`poetry-githooks`](https://pypi.org/project/poetry-githooks/)
 
-We leverage this plugin to handle githooks for us, to make them portable and easy to install. By default our githook is a pre-commit, which will ensure all our commits have been checked for formatting, linting, security, and our tests.
+We leverage this plugin to handle githooks for us, to make them portable and easy to install. By default our githook is a pre-commit, which will ensure all our commits have been checked for formatting, linting, security, and our tests. This is defined in our `pyproject.toml`.
 
 To install or apply changes to one's `[tool.githooks]` simply run:
 

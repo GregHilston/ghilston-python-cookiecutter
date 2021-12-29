@@ -8,9 +8,8 @@ from invoke import task
 
 ROOT_PATH = os.path.dirname(__file__)
 PROJECT_NAME = "{{ cookiecutter.repo_name }}"
-SOURCE_DIRECTORY = PROJECT_NAME.replace('-', '_')
-SOURCE_PATH = os.path.join(ROOT_PATH, SOURCE_DIRECTORY)
-ENTRYPOINT = "foo.py"
+SOURCE_PATH = os.path.join(ROOT_PATH, PROJECT_NAME)
+ENTRYPOINT = "example_project_script.py"
 ENTRYPOINT_PATH = os.path.join(ROOT_PATH, ENTRYPOINT)
 TEST_DIRECTORY = "tests"
 TEST_PATH = os.path.join(ROOT_PATH, TEST_DIRECTORY)
@@ -48,39 +47,39 @@ def run(ctx):
 @task
 def format(ctx):
     """Formats Python code"""
-    ctx.run(f"poetry run black {SOURCE_DIRECTORY} {TEST_DIRECTORY}", echo=True)
-    ctx.run(f"poetry run isort {SOURCE_DIRECTORY} {TEST_DIRECTORY}", echo=True)
+    ctx.run(f"poetry run black {PROJECT_NAME} {TEST_DIRECTORY}", echo=True)
+    ctx.run(f"poetry run isort {PROJECT_NAME} {TEST_DIRECTORY}", echo=True)
 
 
 @task
 def lint(ctx):
     """Lints Python code"""
-    ctx.run(f"poetry run flake8 --show-source {SOURCE_DIRECTORY} {TEST_DIRECTORY}", echo=True)
-    ctx.run(f"poetry run pylint {SOURCE_DIRECTORY} {TEST_DIRECTORY}", echo=True)
+    ctx.run(f"poetry run flake8 --show-source {PROJECT_NAME} {TEST_DIRECTORY}", echo=True)
+    ctx.run(f"poetry run pylint {PROJECT_NAME} {TEST_DIRECTORY}", echo=True)
 
 
 @task
 def test(ctx):
     """Runs Pytest test suite"""
-    ctx.run("poetry run pytest", echo=True)
+    ctx.run(f"poetry run pytest . {PROJECT_NAME}", echo=True)
 
 
 @task
 def coverage(ctx):
     """Produces test coverage"""
-    ctx.run(f"poetry run pytest --cov={SOURCE_DIRECTORY} {TEST_DIRECTORY}", echo=True)
+    ctx.run(f"poetry run pytest --cov=. --cov={PROJECT_NAME} --cov={TEST_DIRECTORY}", echo=True)
 
 
 @task
 def type_check(ctx):
     """Checks types of our Python source code"""
-    ctx.run(f"poetry run mypy {SOURCE_DIRECTORY}", echo=True)
+    ctx.run(f"poetry run mypy {PROJECT_NAME} {TEST_DIRECTORY}", echo=True)
 
 
 @task
 def security(ctx):
     """Performs security checks"""
-    ctx.run(f"poetry run bandit -r {SOURCE_DIRECTORY}", echo=True)
+    ctx.run(f"poetry run bandit -r {PROJECT_NAME}", echo=True)
     ctx.run(f"poetry run safety check --full-report", echo=True)
     ctx.run(f"dodgy", echo=True)
 
@@ -139,6 +138,6 @@ def circle_ci_test(ctx):
 @task
 def circle_ci_security(ctx):
     """Performs security checks for Circle CI, ignoring an out of date Pip binary"""
-    ctx.run(f"poetry run bandit -r {SOURCE_DIRECTORY}", echo=True)
+    ctx.run(f"poetry run bandit -r {PROJECT_NAME}", echo=True)
     ctx.run(f"poetry run safety check --full-report --ignore 40291", echo=True)
     ctx.run(f"dodgy", echo=True)

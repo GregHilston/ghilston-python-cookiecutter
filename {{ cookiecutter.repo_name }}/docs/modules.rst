@@ -4,5 +4,5 @@ ghilston-python-cookiecutter
 .. toctree::
    :maxdepth: 4
 
-   ghilston_python_cookiecutter
+   example_project_script
    tests
