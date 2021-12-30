@@ -15,10 +15,6 @@ TEST_DIRECTORY = "tests"
 TEST_PATH = os.path.join(ROOT_PATH, TEST_DIRECTORY)
 LOGS_DIRECTORY = "log"
 LOGS_PATH = os.path.join(ROOT_PATH, LOGS_DIRECTORY)
-SPHINX_DOCS_DIRECTORY = "./docs"
-# Relative to `./docs` directory
-SPHINX_SOURCE_DIRECTORY = "."
-SPHINX_OUTPUT_DIRECTORY = "_build"
 DOCKER_DIRECTORY = "docker"
 CIRCLE_CI_TEST_OUTPUT_DIRECTORY = "test-results"
 
@@ -84,34 +80,10 @@ def security(ctx):
     ctx.run(f"dodgy", echo=True)
 
 
-@task
-def clean_docs(ctx):
-    """Cleans documentation"""
-    # Makefile equivalent is inside the ./docs folder we'd run
-    # `$ make clean` which runs `$ sphinx-build -M clean "." "_build"`
-    with chdir("./docs"):
-        ctx.run(f"poetry run sphinx-build -M clean '{SPHINX_SOURCE_DIRECTORY}' '{SPHINX_OUTPUT_DIRECTORY}'", echo=True)
-
-
-@task
-def build_docs(ctx):
-    """Generates documentation"""
-    # Makefile equivalent is inside the ./docs folder we'd run
-    # `$ sphinx-apidoc -o . ..`
-    # `$ make html` which runs `$ sphinx-build -M html "." "_build"`
-    with chdir("./docs"):
-        ctx.run(f"poetry run sphinx-apidoc -o {SPHINX_SOURCE_DIRECTORY} ..", echo=True)
-        ctx.run(f"poetry run sphinx-build -M html {SPHINX_SOURCE_DIRECTORY} {SPHINX_OUTPUT_DIRECTORY}", echo=True)
-        print(f"To view built docs see {SPHINX_DOCS_DIRECTORY}/{SPHINX_OUTPUT_DIRECTORY}/html/index.html")
-
-
-@task(pre=[format, lint, type_check, test, security, build_docs])
+@task(pre=[format, lint, type_check, test, security])
 def magic(ctx):
-    """Performs all our checking steps: format, lint, type_check, test, security, build_docs. Then adds the docs to git"""
-    # adds our docs to this commit
-    print(f"Adding {SPHINX_DOCS_DIRECTORY} to this Git staging")
-    ctx.run(f"git add {SPHINX_DOCS_DIRECTORY}")
-    ctx.run(f"git add -u {SPHINX_DOCS_DIRECTORY}")
+    """Performs all our checking steps: format, lint, type_check, test, security."""
+    pass
 
 
 @task
