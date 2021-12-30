@@ -6,7 +6,7 @@ One should install [Cookie Cutter](https://cookiecutter.readthedocs.io/en/1.7.3/
 
 `$ python3 -m cookiecutter ghilston-python-cookiecutter`
 
-or copy this repo straight from github by running: 
+or copy this repo straight from Github by running: 
 
 `$ python3 -m cookiecutter https://github.com/GregHilston/ghilston-python-cookiecutter`
 
@@ -14,11 +14,9 @@ And fill out the interactive form.
 
 ## Virtual Environments, Dependency Resolution, Publishing Packages: [`poetry`](https://github.com/python-poetry/poetry)
 
-Then one can manually copy the `.circleci` folder
-
 ### Why We Use It
 
-Having used numerous tools in the past to handle dependencies, separate tools to build out a virtual environment and yet more tools to publish a package to say PyPi, I have found Poetry's feature rich approach to be a one stop shop for a new Python project.
+Having used numerous tools in the past to handle dependencies, separate tools to build out a virtual environment and yet more tools to publish a package to say PyPi, I have found Poetry's feature rich approach to be a one-stop shop for a new Python project.
 
 ### How To Install Our Dependencies
 
@@ -28,8 +26,7 @@ The [official website](https://python-poetry.org/docs/) suggests one install Poe
 
 `$ curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -`
 
-Once we have poetry installed, we can use it to install our other dependecies by running `$ poetry shell`, and then `$ poetry install`.
-
+Once we have poetry installed, we can use it to install our other dependencies by running `$ poetry install`.
 
 ### Plugin For Githooks: [`poetry-githooks`](https://pypi.org/project/poetry-githooks/)
 
@@ -41,11 +38,11 @@ To install or apply changes to one's `[tool.githooks]` simply run:
 
 ### Removing A Package
 
-- When one removes a package from Poetry using `$ poetry remove [package-name]` the package is removed from the `pyproject.toml` but it is not uninstalled from the virtuale environment. As described in [this github comment](https://github.com/python-poetry/poetry/issues/648#issuecomment-461149012) one can run `$ poetry shell` followed by `exit` to see where the virtual environment lives, then blow away said virtual environment's directory and then ask Poetry to reinstall all the dependencies using `$ poetry install`. This will resolve in your virtual environment no longer having said removed packaged.
+- When one removes a package from Poetry using `$ poetry remove [package-name]` the package is removed from the `pyproject.toml` but it is not uninstalled from the virtual environment. As described in [this github comment](https://github.com/python-poetry/poetry/issues/648#issuecomment-461149012) one can run `$ poetry shell` followed by `exit` to see where the virtual environment lives, then blow away said virtual environment's directory and then ask Poetry to reinstall all the dependencies using `$ poetry install`. This will resolve in your virtual environment no longer having said removed packaged.
 
 ### Upgrading Pip
 
-Using this [Github issue]() as a guide, we can upgrade pip by running
+Using this [Github issue](https://github.com/python-poetry/poetry/issues/1651) as a guide, we can upgrade pip by running
 
 ```
 $ poetry shell
@@ -61,7 +58,7 @@ $ pip install -U pip
 
 ### Why We Use It
 
-Having used raw bash scripts and also `Makefile`s, I have found Invoke's Python approach to handling task execution to be a much more natural approach. One can easily highlight improvements over the previously mentioned approaches by looking at how Invoke handles accepting command line arguments, providing help text and even just the fact that since its Python code, one has access to all Python packages.
+Having used raw bash scripts and also `Makefile`s, I have found Pyinvoke's Python approach to handling task execution to be a much more natural approach. One can easily highlight improvements over the previously mentioned approaches by looking at how Invoke handles accepting command line arguments, providing help text and even just the fact that since its Python code, one has access to all Python packages.
 
 ### How To Use It
 
@@ -108,6 +105,8 @@ While there are many alternatives, such as `unittest` and `nose`, I've found `py
 I've grabbed a common logging configuration from online to act as our default setup.
 
 If we were to use this cookiecutter for a package, we'd want to disable the `FileHandler`, as this can cause difficulty with users leveraging our package.
+
+I may try out the [loguru](https://github.com/Delgan/loguru) library out in the future.
 
 ## Docker
 
