@@ -32,7 +32,9 @@ RUN curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poet
 # and install only runtime deps using poetry
 WORKDIR $PYSETUP_PATH
 COPY ./poetry.lock ./pyproject.toml ./
-RUN poetry install --no-dev  # respects 
+RUN --mount=type=cache,target=/home/.cache/pypoetry/cache \
+    --mount=type=cache,target=/home/.cache/pypoetry/artifacts
+RUN poetry install --no-dev
 
 
 # 'development' stage installs all dev deps and can be used to develop code.
