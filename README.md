@@ -28,14 +28,6 @@ The [official website](https://python-poetry.org/docs/) suggests one install Poe
 
 Once we have poetry installed, we can use it to install our other dependencies by running `$ poetry install`.
 
-### Plugin For Githooks: [`poetry-githooks`](https://pypi.org/project/poetry-githooks/)
-
-We leverage this plugin to handle githooks for us, to make them portable and easy to install. By default our githook is a pre-commit, which will ensure all our commits have been checked for formatting, linting, security, and our tests. This is defined in our `pyproject.toml`.
-
-To install or apply changes to one's `[tool.githooks]` simply run:
-
-`$ poetry run githooks setup`
-
 ### Removing A Package
 
 - When one removes a package from Poetry using `$ poetry remove [package-name]` the package is removed from the `pyproject.toml` but it is not uninstalled from the virtual environment. As described in [this github comment](https://github.com/python-poetry/poetry/issues/648#issuecomment-461149012) one can run `$ poetry shell` followed by `exit` to see where the virtual environment lives, then blow away said virtual environment's directory and then ask Poetry to reinstall all the dependencies using `$ poetry install`. This will resolve in your virtual environment no longer having said removed packaged.
@@ -53,6 +45,16 @@ $ pip install -U pip
 
 - [official documentation](https://python-poetry.org/docs/)
 - [this talk on why Poetry is an excellent tool](https://www.youtube.com/watch?v=QX_Nhu1zhlg&t=202s)
+
+## Git Hooks
+
+We leverage this [Poetry plugin for githook](https://pypi.org/project/poetry-githooks/) to handle githooks for us, to make them portable and easy to install. By default our githook is a pre-commit, which will ensure all our commits have been checked for formatting, linting, security, and our tests. This is defined in our `pyproject.toml`.
+
+To install or apply changes to one's `[tool.githooks]` simply run:
+
+`$ poetry run githooks setup`
+
+If one didn't want to use Poetry, they could use the [pre-commit](https://pre-commit.com/) Python package and define their pre-commits in a `.pre-commit-config.yaml` file.
 
 ## Task Execution Tool: [`invoke`](https://github.com/pyinvoke/invoke)
 
