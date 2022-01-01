@@ -8,4 +8,3 @@ def example_function() -> str:
         Hard coded message
     """
     return "example function"
-
