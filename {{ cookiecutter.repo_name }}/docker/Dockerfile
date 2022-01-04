@@ -84,7 +84,7 @@ COPY ./docker/docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
 
 COPY ./{{ cookiecutter.repo_name }} /app/{{ cookiecutter.repo_name }}
-COPY ./foo.py /app/foo.py
+COPY ./example_project_script.py /app/example_project_script.py
 WORKDIR /app
 
 ENTRYPOINT /docker-entrypoint.sh $0 $@
