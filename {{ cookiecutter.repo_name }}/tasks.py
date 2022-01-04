@@ -7,8 +7,8 @@ from invoke import task
 
 
 ROOT_PATH = os.path.dirname(__file__)
-PROJECT_NAME = "{{ cookiecutter.repo_name }}"
-SOURCE_PATH = os.path.join(ROOT_PATH, PROJECT_NAME)
+PACKAGE_NAME = "sample"
+SOURCE_PATH = os.path.join(ROOT_PATH, PACKAGE_NAME)
 ENTRYPOINT = "example_project_script.py"
 ENTRYPOINT_PATH = os.path.join(ROOT_PATH, ENTRYPOINT)
 TEST_DIRECTORY = "tests"
@@ -43,39 +43,39 @@ def run(ctx):
 @task
 def format(ctx):
     """Formats Python code"""
-    ctx.run(f"poetry run black {PROJECT_NAME} {TEST_DIRECTORY}", echo=True)
-    ctx.run(f"poetry run isort {PROJECT_NAME} {TEST_DIRECTORY}", echo=True)
+    ctx.run(f"poetry run black . {PACKAGE_NAME} {TEST_DIRECTORY}", echo=True)
+    ctx.run(f"poetry run isort . {PACKAGE_NAME} {TEST_DIRECTORY}", echo=True)
 
 
 @task
 def lint(ctx):
     """Lints Python code"""
-    ctx.run(f"poetry run flake8 --show-source {PROJECT_NAME} {TEST_DIRECTORY}", echo=True)
-    ctx.run(f"poetry run pylint {PROJECT_NAME} {TEST_DIRECTORY}", echo=True)
+    ctx.run(f"poetry run flake8 --show-source . {PACKAGE_NAME} {TEST_DIRECTORY}", echo=True)
+    ctx.run(f"poetry run pylint . {PACKAGE_NAME} {TEST_DIRECTORY}", echo=True)
 
 
 @task
 def test(ctx):
     """Runs Pytest test suite"""
-    ctx.run(f"poetry run pytest . {PROJECT_NAME}", echo=True)
+    ctx.run(f"poetry run pytest . {PACKAGE_NAME}", echo=True)
 
 
 @task
 def coverage(ctx):
     """Produces test coverage"""
-    ctx.run(f"poetry run pytest --cov=. --cov={PROJECT_NAME} --cov={TEST_DIRECTORY}", echo=True)
+    ctx.run(f"poetry run pytest --cov=. --cov={PACKAGE_NAME} --cov={TEST_DIRECTORY}", echo=True)
 
 
 @task
 def type_check(ctx):
     """Checks types of our Python source code"""
-    ctx.run(f"poetry run mypy {PROJECT_NAME} {TEST_DIRECTORY}", echo=True)
+    ctx.run(f"poetry run mypy --exclude setup.py", echo=True)
 
 
 @task
 def security(ctx):
     """Performs security checks"""
-    ctx.run(f"poetry run bandit -r {PROJECT_NAME}", echo=True)
+    ctx.run(f"poetry run bandit -r . {PACKAGE_NAME}", echo=True)
     ctx.run(f"poetry run safety check --full-report", echo=True)
     ctx.run(f"dodgy", echo=True)
 
@@ -89,7 +89,11 @@ def magic(ctx):
 @task
 def docker_build(ctx):
     """Builds Docker image"""
-    ctx.run(f"poetry run docker build --tag {PROJECT_NAME} --file {DOCKER_DIRECTORY}/Dockerfile .")
+    # Requires Docker buildkit to be enabled with our environment variable, can read more about that here:
+    # https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/syntax.md
+    ctx.run(
+        f"poetry run export DOCKER_BUILDKIT=1 docker build --tag {PACKAGE_NAME} --file {DOCKER_DIRECTORY}/Dockerfile ."
+    )
 
 
 @task
@@ -97,7 +101,7 @@ def docker_run(ctx):
     """Builds Docker container"""
     # can read here for why pty=True is required
     # http://www.pyinvoke.org/faq.html#why-is-my-command-behaving-differently-under-invoke-versus-being-run-by-hand
-    ctx.run(f"docker run -it {PROJECT_NAME} /docker-entrypoint.sh python {ENTRYPOINT}", pty=True)
+    ctx.run(f"docker run -it {PACKAGE_NAME} /docker-entrypoint.sh python {ENTRYPOINT}", pty=True)
 
 
 @task
@@ -110,6 +114,6 @@ def circle_ci_test(ctx):
 @task
 def circle_ci_security(ctx):
     """Performs security checks for Circle CI, ignoring an out of date Pip binary"""
-    ctx.run(f"poetry run bandit -r {PROJECT_NAME}", echo=True)
+    ctx.run(f"poetry run bandit -r {PACKAGE_NAME}", echo=True)
     ctx.run(f"poetry run safety check --full-report --ignore 40291", echo=True)
     ctx.run(f"dodgy", echo=True)
