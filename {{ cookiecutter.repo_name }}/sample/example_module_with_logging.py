@@ -2,7 +2,7 @@
 
 import logging
 
-from sample import example_utils_module
+from . import example_utils_module
 
 example_utils_module.setup_logging()
 logger = logging.getLogger(__name__)
