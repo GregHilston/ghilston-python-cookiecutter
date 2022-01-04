@@ -1,6 +1,6 @@
 import pytest
 
-from example_package_with_logging import example_module_with_logging
+from .context import sample
 
 
 def test_example_package():

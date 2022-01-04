@@ -2,9 +2,7 @@
 
 import logging
 
-from sample import example_module
-from sample import example_module_with_logging
-from sample import example_utils_module
+from sample import example_module, example_module_with_logging, example_utils_module
 
 
 example_utils_module.setup_logging()
