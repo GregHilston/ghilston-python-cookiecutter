@@ -69,15 +69,15 @@ def coverage(ctx):
 @task
 def type_check(ctx):
     """Checks types of our Python source code"""
-    ctx.run(f"poetry run mypy --exclude setup.py", echo=True)
+    ctx.run("poetry run mypy --exclude setup.py", echo=True)
 
 
 @task
 def security(ctx):
     """Performs security checks"""
     ctx.run(f"poetry run bandit -r . {PACKAGE_NAME}", echo=True)
-    ctx.run(f"poetry run safety check --full-report", echo=True)
-    ctx.run(f"dodgy", echo=True)
+    ctx.run("poetry run safety check --full-report", echo=True)
+    ctx.run("dodgy", echo=True)
 
 
 @task(pre=[format, lint, type_check, test, security])
@@ -115,5 +115,5 @@ def circle_ci_test(ctx):
 def circle_ci_security(ctx):
     """Performs security checks for Circle CI, ignoring an out of date Pip binary"""
     ctx.run(f"poetry run bandit -r {PACKAGE_NAME}", echo=True)
-    ctx.run(f"poetry run safety check --full-report --ignore 40291", echo=True)
-    ctx.run(f"dodgy", echo=True)
+    ctx.run("poetry run safety check --full-report --ignore 40291", echo=True)
+    ctx.run("dodgy", echo=True)
