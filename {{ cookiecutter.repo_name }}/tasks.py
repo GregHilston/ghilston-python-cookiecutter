@@ -50,8 +50,8 @@ def format(ctx):
 @task
 def lint(ctx):
     """Lints Python code"""
-    ctx.run(f"poetry run flake8 --show-source . {PACKAGE_NAME} {TEST_DIRECTORY}", echo=True)
-    ctx.run(f"poetry run pylint . {PACKAGE_NAME} {TEST_DIRECTORY}", echo=True)
+    ctx.run(f"poetry run flake8 --show-source {ENTRYPOINT_PATH} {PACKAGE_NAME}", echo=True)
+    ctx.run(f"poetry run pylint {ENTRYPOINT_PATH} {PACKAGE_NAME}", echo=True)
 
 
 @task

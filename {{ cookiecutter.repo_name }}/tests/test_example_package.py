@@ -1,7 +1,7 @@
 import pytest
 
-from example_package import example_module
-from sample import example_module_with_logging
+from .context import sample
+from sample import example_module
 
 
 def test_example_package():
