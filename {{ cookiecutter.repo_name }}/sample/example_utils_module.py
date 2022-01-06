@@ -20,7 +20,7 @@ def setup_logging(default_path: str = "logging.json", default_level: int = loggi
     if value:
         path = value
     if os.path.exists(path):
-        with open(path, "rt") as f:
+        with open(path, "rt", encoding="utf8") as f:
             config = json.load(f)
         logging.config.dictConfig(config)
     else:
