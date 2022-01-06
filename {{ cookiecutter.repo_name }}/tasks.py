@@ -113,7 +113,7 @@ def docker_run(ctx):
 @task
 def docker_compose_magic(ctx):
     """Runs magic task in docker compose. This is so our entire directory is conveniently volumed in for development"""
-    ctx.run(f"DOCKER_BUILDKIT=1 docker-compose --file docker/docker-compose.yml up")
+    ctx.run(f"DOCKER_BUILDKIT=1 docker-compose --file docker/docker-compose.yml run app")
 
 
 @task
