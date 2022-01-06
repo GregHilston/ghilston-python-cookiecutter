@@ -75,7 +75,7 @@ def type_check(ctx):
 @task
 def security(ctx):
     """Performs security checks"""
-    ctx.run(f"poetry run bandit -r . {PACKAGE_NAME}", echo=True)
+    ctx.run(f"poetry run bandit -r {PACKAGE_NAME}", echo=True)
     ctx.run("poetry run safety check --full-report", echo=True)
     ctx.run("dodgy", echo=True)
 
