@@ -1,4 +1,10 @@
-"""Invokes tasks"""
+"""
+Invokes tasks
+
+Should generally be ran like: $ poetry run invoke [task name]
+
+Can be ran without Poetry if the environment has the task's required dependencies installed.
+"""
 
 import contextlib
 import os
@@ -37,46 +43,46 @@ def chdir(dirname=None):
 @task
 def run(ctx):
     """Runs the application"""
-    ctx.run(f"poetry run python3 {ENTRYPOINT_PATH}", echo=True)
+    ctx.run(f"python3 {ENTRYPOINT_PATH}", echo=True)
 
 
 @task
 def format(ctx):
     """Formats Python code"""
-    ctx.run(f"poetry run black . {PACKAGE_NAME} {TEST_DIRECTORY}", echo=True)
-    ctx.run(f"poetry run isort . {PACKAGE_NAME} {TEST_DIRECTORY}", echo=True)
+    ctx.run(f"black . {PACKAGE_NAME} {TEST_DIRECTORY}", echo=True)
+    ctx.run(f"isort . {PACKAGE_NAME} {TEST_DIRECTORY}", echo=True)
 
 
 @task
 def lint(ctx):
     """Lints Python code"""
-    ctx.run(f"poetry run flake8 --show-source {ENTRYPOINT_PATH} {PACKAGE_NAME}", echo=True)
-    ctx.run(f"poetry run pylint {ENTRYPOINT_PATH} {PACKAGE_NAME}", echo=True)
+    ctx.run(f"flake8 --show-source {ENTRYPOINT_PATH} {PACKAGE_NAME}", echo=True)
+    ctx.run(f"pylint {ENTRYPOINT_PATH} {PACKAGE_NAME}", echo=True)
 
 
 @task
 def test(ctx):
     """Runs Pytest test suite"""
-    ctx.run(f"poetry run pytest . {PACKAGE_NAME}", echo=True)
+    ctx.run(f"pytest . {PACKAGE_NAME}", echo=True)
 
 
 @task
 def coverage(ctx):
     """Produces test coverage"""
-    ctx.run(f"poetry run pytest --cov=. --cov={PACKAGE_NAME} --cov={TEST_DIRECTORY}", echo=True)
+    ctx.run(f"pytest --cov=. --cov={PACKAGE_NAME} --cov={TEST_DIRECTORY}", echo=True)
 
 
 @task
 def type_check(ctx):
     """Checks types of our Python source code"""
-    ctx.run("poetry run mypy --exclude tasks.py .", echo=True)
+    ctx.run("mypy --exclude tasks.py .", echo=True)
 
 
 @task
 def security(ctx):
     """Performs security checks"""
-    ctx.run(f"poetry run bandit -r {PACKAGE_NAME}", echo=True)
-    ctx.run("poetry run safety check --full-report", echo=True)
+    ctx.run(f"bandit -r {PACKAGE_NAME}", echo=True)
+    ctx.run("safety check --full-report", echo=True)
     ctx.run("dodgy", echo=True)
 
 
@@ -92,7 +98,7 @@ def docker_build(ctx):
     # Requires Docker buildkit to be enabled with our environment variable, can read more about that here:
     # https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/syntax.md
     ctx.run(
-        f"poetry run export DOCKER_BUILDKIT=1 docker build --tag {PACKAGE_NAME} --file {DOCKER_DIRECTORY}/Dockerfile ."
+        f"DOCKER_BUILDKIT=1 docker build --tag {PACKAGE_NAME} --file {DOCKER_DIRECTORY}/Dockerfile ."
     )
 
 
