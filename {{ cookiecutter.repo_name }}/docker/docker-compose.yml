@@ -1,0 +1,11 @@
+version: '3.0'
+
+services:
+  app:
+    volumes:
+      - '.:/app'
+    build:
+      # ensures our Dockerfile's references to files work just like when we're not using Docker Compose
+      context: ..
+      dockerfile: docker/Dockerfile
+    entrypoint: bash invoke magic

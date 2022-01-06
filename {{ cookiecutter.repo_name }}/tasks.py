@@ -111,6 +111,12 @@ def docker_run(ctx):
 
 
 @task
+def docker_compose_magic(ctx):
+    """Runs magic task in docker compose. This is so our entire directory is conveniently volumed in for development"""
+    ctx.run(f"DOCKER_BUILDKIT=1 docker-compose --file docker/docker-compose.yml up")
+
+
+@task
 def circle_ci_test(ctx):
     """Runs Pytest test suite for Circle CI, saving our output as Junit XML style for ease of parsing"""
     ctx.run(f"mkdir {CIRCLE_CI_TEST_OUTPUT_DIRECTORY}")
