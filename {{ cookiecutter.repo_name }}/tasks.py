@@ -69,7 +69,7 @@ def coverage(ctx):
 @task
 def type_check(ctx):
     """Checks types of our Python source code"""
-    ctx.run("poetry run mypy --exclude setup.py", echo=True)
+    ctx.run("poetry run mypy --exclude tasks.py .", echo=True)
 
 
 @task
