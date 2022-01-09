@@ -1,0 +1,6 @@
+FROM sample
+
+RUN ["python3", "-m" , "install", "invoke"]
+RUN ["python3", "-m", "pip", "install", "black", "isort", "flake8", "pylint", "pytest", "mypy", "bandit", "safety", "dodgy"]
+
+ENTRYPOINT ["invoke", "magic"]

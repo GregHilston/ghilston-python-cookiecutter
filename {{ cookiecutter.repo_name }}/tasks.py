@@ -23,6 +23,8 @@ LOGS_DIRECTORY = "log"
 LOGS_PATH = os.path.join(ROOT_PATH, LOGS_DIRECTORY)
 DOCKER_DIRECTORY = "docker"
 CIRCLE_CI_TEST_OUTPUT_DIRECTORY = "test-results"
+DOCKER_IMAGE_NAME = f"ghilston-{PACKAGE_NAME}"
+DEV_DOCKER_IMAGE_NAME = f"ghilston-{PACKAGE_NAME}-dev"
 
 
 @contextlib.contextmanager
@@ -97,9 +99,19 @@ def docker_build(ctx):
     """Builds Docker image"""
     # Requires Docker buildkit to be enabled with our environment variable, can read more about that here:
     # https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/syntax.md
+    ctx.run(f"DOCKER_BUILDKIT=1 docker build --tag {DOCKER_IMAGE_NAME} --file {DOCKER_DIRECTORY}/Dockerfile .")
+    print(f"docker image built and tagged with image name {DOCKER_IMAGE_NAME}")
+
+
+@task
+def docker_dev_build(ctx):
+    """Builds DockerDev image"""
+    # Requires Docker buildkit to be enabled with our environment variable, can read more about that here:
+    # https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/syntax.md
     ctx.run(
-        f"DOCKER_BUILDKIT=1 docker build --tag {PACKAGE_NAME} --file {DOCKER_DIRECTORY}/Dockerfile ."
+        f"DOCKER_BUILDKIT=1 docker build --tag {DEV_DOCKER_IMAGE_NAME} --file {DOCKER_DIRECTORY}/DockerfileDev ."
     )
+    print(f"docker dev image built and tagged with image name {DEV_DOCKER_IMAGE_NAME}")
 
 
 @task
@@ -107,7 +119,16 @@ def docker_run(ctx):
     """Builds Docker container"""
     # can read here for why pty=True is required
     # http://www.pyinvoke.org/faq.html#why-is-my-command-behaving-differently-under-invoke-versus-being-run-by-hand
-    ctx.run(f"docker run -it {PACKAGE_NAME} /docker-entrypoint.sh python {ENTRYPOINT}", pty=True)
+    ctx.run(f"docker run -it {DOCKER_IMAGE_NAME} /docker-entrypoint.sh python {ENTRYPOINT}", pty=True)
+
+
+@task
+def docker_dev_run(ctx):
+    """Builds Docker container"""
+    current_directory = os.path.dirname(os.path.realpath(__file__))
+    # can read here for why pty=True is required
+    # http://www.pyinvoke.org/faq.html#why-is-my-command-behaving-differently-under-invoke-versus-being-run-by-hand
+    ctx.run(f"docker run -it  -v {current_directory}:/app {DEV_DOCKER_IMAGE_NAME}", pty=True)
 
 
 @task
