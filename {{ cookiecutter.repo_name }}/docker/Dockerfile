@@ -29,7 +29,7 @@ ENV POETRY_VERSION=1.1.12
 RUN curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
 
 # We copy our Python requirements here to cache them
-# and install only runtime deps using poetry
+# and install only non-development dependencies using poetry
 WORKDIR $PYSETUP_PATH
 COPY ./poetry.lock ./pyproject.toml ./
 RUN --mount=type=cache,target=/home/.cache/pypoetry/cache \
@@ -49,7 +49,7 @@ COPY --from=builder-base $PYSETUP_PATH $PYSETUP_PATH
 COPY ./docker/docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
 
-# venv already has runtime deps installed we get a quicker install
+# venv already has non-development dependencies installed, so we'll get a quicker install
 WORKDIR $PYSETUP_PATH
 RUN poetry install
 
@@ -83,8 +83,10 @@ COPY --from=builder-base $VENV_PATH $VENV_PATH
 COPY ./docker/docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
 
-COPY ./{{ cookiecutter.repo_name }} /app/{{ cookiecutter.repo_name }}
+COPY ./sample /app/sample
 COPY ./example_project_script.py /app/example_project_script.py
 WORKDIR /app
 
+# $0: the name of the shell or shell script.
+# $@: an array-like construct of all positional parameters, {$1, $2, $3 ...}.
 ENTRYPOINT /docker-entrypoint.sh $0 $@

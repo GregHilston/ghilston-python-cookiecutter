@@ -1,6 +1,7 @@
 #!/bin/bash
-
-set -e
+# bash "strict mode"
+set -euo pipefail
+IFS=$'\n\t'
 
 # activate our virtual environment here
 . /opt/pysetup/.venv/bin/activate
