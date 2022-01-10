@@ -1,12 +1,13 @@
 [tool.poetry]
-name = "{{ cookiecutter.repo_name }}"
+name = "test-ghilston-python-cookiecutter"
 version = "0.1.0"
-description = "{{ cookiecutter.repo_name }}"
-authors = ["{{ cookiecutter.author_name }}"]
+description = "test-ghilston-python-cookiecutter"
+authors = ["GregHilston <Gregory.Hilston@gmail.com>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.8"
+loguru = "^0.5.3"
 
 [tool.poetry.dev-dependencies]
 black = "^21.5b1"
@@ -24,6 +25,7 @@ flake8 = "^3.9.2"
 poetry-githooks = "^1.1.4"
 pyinvoke = "^1.0.4"
 pdbpp = "^0.10.3"
+loguru = "^0.5.3"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

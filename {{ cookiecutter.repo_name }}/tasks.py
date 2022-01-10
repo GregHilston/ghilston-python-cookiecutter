@@ -115,7 +115,7 @@ def docker_development(ctx):
     """TODO"""
     # can read here for why pty=True is required
     # http://www.pyinvoke.org/faq.html#why-is-my-command-behaving-differently-under-invoke-versus-being-run-by-hand
-    ctx.run(f"DOCKER_BUILDKIT=1 docker-compose --file docker/docker-compose.yml up", pty=True)
+    ctx.run(f"DOCKER_BUILDKIT=1 docker-compose --file docker/docker-compose.yml up --build", pty=True)
 
 
 @task

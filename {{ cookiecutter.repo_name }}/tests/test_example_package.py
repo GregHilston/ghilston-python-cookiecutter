@@ -1,7 +1,8 @@
 import pytest
 
-from .context import sample
 from sample import example_module
+
+from .context import sample
 
 
 def test_example_package():

@@ -1,12 +1,8 @@
 """Example module that leverages one of our own modules"""
 
-import logging
+from loguru import logger
 
-from sample import example_utils_module
-
-
-example_utils_module.setup_logging()
-logger = logging.getLogger(__name__)
+from sample import example_module_to_import
 
 
 def example_function_with_logging() -> str:
@@ -15,6 +11,6 @@ def example_function_with_logging() -> str:
     Returns:
         Hard coded message
     """
-    message = "example function"
+    message = example_module_to_import.example_function_to_import()
     logger.info(message)
     return message

@@ -1,13 +1,9 @@
 """Example source code file that leverages our package code"""
 
-import logging
+from loguru import logger
 
-from sample import example_module, example_module_with_logging, example_utils_module
-
-
-example_utils_module.setup_logging()
-logger = logging.getLogger(__name__)
+from sample import example_module, example_module_importing_another_module
 
 if __name__ == "__main__":
     logger.info(example_module.example_function())
-    logger.info(example_module_with_logging.example_function_with_logging())
+    logger.info(example_module_importing_another_module.example_function_with_logging())
