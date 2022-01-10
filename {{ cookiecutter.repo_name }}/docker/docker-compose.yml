@@ -8,9 +8,10 @@ services:
       # ensures our Dockerfile's references to files work just like when we're not using Docker Compose
       context: ..
       dockerfile: docker/Dockerfile
+      target: development
     environment:
       - PYTHONUNBUFFERED=1
     # Essentially allows us to have an interactive container
     stdin_open: true # docker run -i
     tty: true        # docker run -t
-    entrypoint: "./docker/docker-compose-entrypoint.sh"
+    entrypoint: "./docker/docker-entrypoint-development.sh"

@@ -1,4 +1,6 @@
-# from https://github.com/python-poetry/poetry/discussions/1879#discussioncomment-216865
+# inspired by:
+# - https://github.com/python-poetry/poetry/discussions/1879#discussioncomment-216865
+# - https://blog.mikesir87.io/2018/07/leveraging-multi-stage-builds-single-dockerfile-dev-prod/
 
 # `python-base` sets up all our shared environment variables
 FROM python:3.9.9-slim-buster as python-base
@@ -39,7 +41,7 @@ RUN poetry install --no-dev
 
 # 'development' stage installs all dev deps and can be used to develop code.
 # For example using docker-compose to mount local volume under /app
-FROM python-base as development
+FROM builder-base as development
 
 # Copying poetry and venv into image
 COPY --from=builder-base $POETRY_HOME $POETRY_HOME
@@ -54,24 +56,10 @@ WORKDIR $PYSETUP_PATH
 RUN poetry install
 
 WORKDIR /app
-COPY . .
 
-ENTRYPOINT /docker-entrypoint.sh $0 $@
-CMD ["poetry", "run", "invoke", "run"]
-
-
-# 'lint' stage runs black and isort
-# running in check mode means build will fail if any linting errors occur
-FROM development AS lint
-RUN poetry run invoke lint
-CMD ["tail", "-f", "/dev/null"]
-
-
-# 'test' stage runs our unit tests with pytest and
-# coverage.  Build will fail if test coverage is under 95%
-FROM development AS test
-RUN poetry run invoke test
-CMD ["tail", "-f", "/dev/null"]
+# $0: the name of the shell or shell script.
+# $@: an array-like construct of all positional parameters, {$1, $2, $3 ...}.
+ENTRYPOINT /docker-entrypoint-development.sh $0 $@
 
 
 # 'production' stage uses the clean 'python-base' stage and copies

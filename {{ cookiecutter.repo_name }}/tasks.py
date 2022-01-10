@@ -11,7 +11,6 @@ import os
 
 from invoke import task
 
-
 ROOT_PATH = os.path.dirname(__file__)
 PACKAGE_NAME = "sample"
 SOURCE_PATH = os.path.join(ROOT_PATH, PACKAGE_NAME)
@@ -71,7 +70,7 @@ def test(ctx):
 @task
 def coverage(ctx):
     """Produces test coverage"""
-    ctx.run(f"pytest --cov=. --cov={PACKAGE_NAME} --cov={TEST_DIRECTORY}", echo=True)
+    ctx.run(f"pytest --cov=. --cov={PACKAGE_NAME}", echo=True)
 
 
 @task
@@ -88,9 +87,9 @@ def security(ctx):
     ctx.run("dodgy", echo=True)
 
 
-@task(pre=[format, lint, type_check, test, security])
+@task(pre=[format, lint, type_check, security, test])
 def magic(ctx):
-    """Performs all our checking steps: format, lint, type_check, test, security."""
+    """Performs all our checking steps."""
     pass
 
 
@@ -104,17 +103,6 @@ def docker_build(ctx):
 
 
 @task
-def docker_dev_build(ctx):
-    """Builds DockerDev image"""
-    # Requires Docker buildkit to be enabled with our environment variable, can read more about that here:
-    # https://github.com/moby/buildkit/blob/master/frontend/dockerfile/docs/syntax.md
-    ctx.run(
-        f"DOCKER_BUILDKIT=1 docker build --tag {DEV_DOCKER_IMAGE_NAME} --file {DOCKER_DIRECTORY}/DockerfileDev ."
-    )
-    print(f"docker dev image built and tagged with image name {DEV_DOCKER_IMAGE_NAME}")
-
-
-@task
 def docker_run(ctx):
     """Builds Docker container"""
     # can read here for why pty=True is required
@@ -123,18 +111,11 @@ def docker_run(ctx):
 
 
 @task
-def docker_dev_run(ctx):
-    """Builds Docker container"""
-    current_directory = os.path.dirname(os.path.realpath(__file__))
+def docker_development(ctx):
+    """TODO"""
     # can read here for why pty=True is required
     # http://www.pyinvoke.org/faq.html#why-is-my-command-behaving-differently-under-invoke-versus-being-run-by-hand
-    ctx.run(f"docker run -it  -v {current_directory}:/app {DEV_DOCKER_IMAGE_NAME}", pty=True)
-
-
-@task
-def docker_compose_magic(ctx):
-    """Runs magic task in docker compose. This is so our entire directory is conveniently volumed in for development"""
-    ctx.run(f"DOCKER_BUILDKIT=1 docker-compose --file docker/docker-compose.yml run app")
+    ctx.run(f"DOCKER_BUILDKIT=1 docker-compose --file docker/docker-compose.yml up", pty=True)
 
 
 @task
