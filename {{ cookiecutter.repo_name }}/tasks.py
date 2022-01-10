@@ -76,6 +76,8 @@ def coverage(ctx):
 @task
 def type_check(ctx):
     """Checks types of our Python source code"""
+    # Could stop the writing to a cache directory to avoid our Docker container's from writing as root when volumning in, by adding --cache-dir=/dev/null
+    # https://mypy.readthedocs.io/en/stable/command_line.html#cmdoption-mypy-cache-dir
     ctx.run("mypy --exclude tasks.py .", echo=True)
 
 
