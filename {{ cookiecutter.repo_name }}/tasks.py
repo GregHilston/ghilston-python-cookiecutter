@@ -64,7 +64,8 @@ def lint(ctx):
 @task
 def test(ctx):
     """Runs Pytest test suite"""
-    ctx.run(f"pytest . {PACKAGE_NAME}", echo=True)
+    ctx.run(f"mkdir {CIRCLE_CI_TEST_OUTPUT_DIRECTORY}")
+    ctx.run(f"poetry run pytest --junitxml={CIRCLE_CI_TEST_OUTPUT_DIRECTORY}/junit.xml .", echo=True)
 
 
 @task

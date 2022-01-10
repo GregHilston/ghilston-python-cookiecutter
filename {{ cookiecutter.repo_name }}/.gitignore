@@ -1,3 +1,5 @@
+test-results/
+
 # Overwrite gitignore.io's decision and ignore entire .idea/ folder generated and used by pycharm
 # not everyone uses pycharm, so this shouldn't be in our repository
 .idea/
